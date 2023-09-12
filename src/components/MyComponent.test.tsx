@@ -5,7 +5,7 @@ import { MyComponent } from "./MyComponent";
 describe("MyComponent", async () => {
     test("Should have text Hello from My Component on it", () => {
         render(<MyComponent />);
-        const elem = screen.getByText("Hello from My Component");
+        const elem = screen.getByText("Hello from C7C4 group");
         expect(elem).toBeInTheDocument();
     });
 });
