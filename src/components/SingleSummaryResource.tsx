@@ -11,9 +11,9 @@ export function SingleSummaryResource({
         <div className="single-summary-resource-container">
             <h1>{resource.title}</h1>
             <span> by {resource.author}</span>
-            <a href={resource.url}>URL</a>
+            <a href={resource.url}> URL</a>
             <p>{resource.description}</p>
-            {/* <p>tags</p> */}
+            <p>Tags: {resource.tags}</p>
         </div>
     );
 }

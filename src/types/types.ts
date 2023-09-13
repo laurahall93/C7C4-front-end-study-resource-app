@@ -12,3 +12,8 @@ export interface ResourceType {
     comment_reason: string;
     name: string;
 }
+
+export interface UserType {
+    id: number;
+    name: string;
+}
