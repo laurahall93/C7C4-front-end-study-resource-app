@@ -1,4 +1,4 @@
-import { ResourceType } from "../components/AllResources";
+import { ResourceType } from "../types/types";
 
 export function filterResources(
     searchInput: string,

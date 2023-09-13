@@ -1,4 +1,4 @@
-import { ResourceType } from "./AllResources";
+import { ResourceType } from "../types/types";
 
 interface SingleSummaryResourceProps {
     resource: ResourceType;
