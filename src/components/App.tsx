@@ -1,10 +1,10 @@
-import { MyComponent } from "./MyComponent";
 import "./App.css";
+import { AllResources } from "./AllResources";
 
 function App() {
     return (
         <div className="App">
-            <MyComponent />
+            <AllResources />
         </div>
     );
 }
