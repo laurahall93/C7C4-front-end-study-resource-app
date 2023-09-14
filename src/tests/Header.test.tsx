@@ -1,4 +1,4 @@
-import { Header } from "../components/Header";
+import Header from "../components/Header";
 import { render, screen } from "../testUtils/testUtils";
 
 describe("Header", async () => {
