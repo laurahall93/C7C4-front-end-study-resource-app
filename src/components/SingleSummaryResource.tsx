@@ -10,10 +10,16 @@ export function SingleSummaryResource({
     return (
         <div className="single-summary-resource-container">
             <h1>{resource.title}</h1>
-            <span> by {resource.author}</span>
+            <span>
+                <strong> By: </strong>
+                {resource.author}
+            </span>
             <a href={resource.url}> URL</a>
             <p>{resource.description}</p>
-            <p>Tags: {resource.tags}</p>
+            <p>
+                <strong>Tags: </strong>
+                {resource.tags}
+            </p>
         </div>
     );
 }
