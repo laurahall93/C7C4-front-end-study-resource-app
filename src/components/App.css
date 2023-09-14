@@ -50,6 +50,7 @@ img {
     margin-right: 2%;
     padding: 5px;
     border: 1px solid green;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 }
 .recources-input {
     border: 1px solid green;
@@ -60,6 +61,7 @@ img {
     padding: 0.5%;
     font-family: "Literata", serif;
     font-size: larger;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 }
 .single-summary-resource-container {
     background-color: #f4f6e4;
