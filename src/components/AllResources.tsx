@@ -3,11 +3,8 @@ import { SingleSummaryResource } from "./SingleSummaryResource";
 import { filterResources } from "../utils/filterResources";
 import axios from "axios";
 import { ResourceType } from "../types/types";
-
-const baseUrl =
-    process.env.NODE_ENV === "production"
-        ? "https://study-resource-cataloge-app-c7c4.onrender.com"
-        : "http://localhost:4000";
+import { baseUrl } from "../utils/baseUrl";
+import { UserSignIn } from "./UserSignIn";
 
 export function AllResources(): JSX.Element {
     const [searchInput, setSearchInput] = useState("");
@@ -25,6 +22,7 @@ export function AllResources(): JSX.Element {
 
     return (
         <div>
+            <UserSignIn />
             <input
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
