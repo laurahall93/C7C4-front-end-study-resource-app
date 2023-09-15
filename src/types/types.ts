@@ -17,3 +17,8 @@ export interface UserType {
     id: number;
     name: string;
 }
+
+export interface TagType {
+    id: number;
+    tag_name: string;
+}

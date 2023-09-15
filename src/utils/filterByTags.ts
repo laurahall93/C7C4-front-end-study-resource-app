@@ -14,7 +14,9 @@ export function filterByTags(
     chosenTags: string[],
     resourceList: ResourceType[]
 ): ResourceType[] {
-    return resourceList.filter((resource) =>
-        isStringInArray(resource.tags, chosenTags)
-    );
+    return chosenTags.length === 0
+        ? resourceList
+        : resourceList.filter((resource) =>
+              isStringInArray(resource.tags, chosenTags)
+          );
 }
