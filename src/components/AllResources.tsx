@@ -21,9 +21,10 @@ export function AllResources(): JSX.Element {
     }, []);
 
     return (
-        <div>
+        <div className="main-body">
             <UserSignIn />
             <input
+                className="recources-input"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 placeholder="Search for Resources"

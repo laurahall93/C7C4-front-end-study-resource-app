@@ -17,7 +17,7 @@ export function UserSignIn(): JSX.Element {
     }, []);
 
     return (
-        <>
+        <div className="sign-in">
             <label htmlFor="user-sign-in"> Sign in:</label>
             <select name="users" id="user-sign-in">
                 <option value="">--not signed in--</option>
@@ -27,6 +27,6 @@ export function UserSignIn(): JSX.Element {
                     </option>
                 ))}
             </select>
-        </>
+        </div>
     );
 }
