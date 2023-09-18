@@ -3,19 +3,13 @@ import { SingleSummaryResource } from "./SingleSummaryResource";
 import axios from "axios";
 import { ResourceType, TagType } from "../types/types";
 import { baseUrl } from "../utils/baseUrl";
-import { UserSignIn } from "./UserSignIn";
 import { filterBySearchAndTags } from "../utils/filterBySearchAndTags";
-
-const tags = [
-    { id: 1, tag_name: "HTML" },
-    { id: 2, tag_name: "CSS" },
-    { id: 3, tag_name: "JavaScript" },
-];
 
 export function AllResources(): JSX.Element {
     const [searchInput, setSearchInput] = useState("");
     const [allResources, setAllResources] = useState<ResourceType[]>([]);
     const [chosenTags, setChosenTags] = useState<string[]>([]);
+    const [allTags, setAllTags] = useState<TagType[]>([]);
 
     async function fetchAndStoreResourceList() {
         const response = await axios.get(baseUrl + "/resources");
@@ -23,14 +17,15 @@ export function AllResources(): JSX.Element {
         setAllResources(allFetchedResources);
     }
 
-    // async function fetchAndStoreTagsList() {
-    //     const response = await axios.get(baseUrl + "/tags");
-    //     const allFetchedTags: TagType[] = response.data;
-    //     return allFetchedTags
-    // }
+    async function fetchAndStoreTagsList() {
+        const response = await axios.get(baseUrl + "/tags");
+        const allFetchedTags: TagType[] = response.data;
+        setAllTags(allFetchedTags);
+    }
 
     useEffect(() => {
         fetchAndStoreResourceList();
+        fetchAndStoreTagsList();
     }, []);
 
     function handleSelectTag(tagName: string) {
@@ -43,7 +38,6 @@ export function AllResources(): JSX.Element {
 
     return (
         <div className="main-body">
-            <UserSignIn />
             <input
                 className="recources-input"
                 value={searchInput}
@@ -51,7 +45,7 @@ export function AllResources(): JSX.Element {
                 placeholder="Search for Resources"
             />
             <br />
-            {tags.map((tag) => (
+            {allTags.map((tag) => (
                 <button
                     className={
                         chosenTags.includes(tag.tag_name)
