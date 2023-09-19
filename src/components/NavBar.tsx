@@ -26,8 +26,11 @@ export function NavBar({
         setSignedInUser(undefined);
     }
 
-    function handleNavBarChoice(buttonValue: any) {
-        setNavBarChoice(buttonValue);
+    function handleNavBarChoice(
+        buttonValue: React.MouseEvent<HTMLButtonElement>
+    ) {
+        console.log(buttonValue);
+        setNavBarChoice(buttonValue.currentTarget.value);
     }
 
     useEffect(() => {
@@ -38,7 +41,7 @@ export function NavBar({
         <div>
             <p>Hi {userName}</p>
             <button
-                onClick={(a) => handleNavBarChoice(a)}
+                onClick={(e) => handleNavBarChoice(e)}
                 value="AddNewResource"
             >
                 Add new resource

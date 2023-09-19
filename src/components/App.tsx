@@ -27,12 +27,11 @@ function App() {
                     setNavBarChoice={setNavBarChoice}
                 />
             )}
-            {navBarChoice === "AllResources" ? (
-                <AllResources />
-            ) : (
+            {navBarChoice === "AddNewResource" && signedInUser ? (
                 <AddNewResource signedInUser={signedInUser} />
+            ) : (
+                <AllResources />
             )}
-            <AllResources />
             <Footer />
         </div>
     );

@@ -1,48 +1,80 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { baseUrl } from "../utils/baseUrl";
+import { TagType } from "../types/types";
+import addTagsToResources from "../utils/filterTagObjToArray";
 
 interface SignedInUserIdProps {
-    signedInUser: string | undefined;
+    signedInUser: string;
 }
 
 interface EventType {
     target: { name: string; value: string; type: string; checked: boolean };
 }
 
-export default function AddNewResource(
-    signedInUser: SignedInUserIdProps
-): JSX.Element {
+export interface SelectedTagsType {
+    [tag: string]: boolean;
+}
+
+export default function AddNewResource({
+    signedInUser,
+}: SignedInUserIdProps): JSX.Element {
+    const [userSelectedTags, setUserSelectedTags] = useState<SelectedTagsType>(
+        {}
+    );
+    const [allTags, setAllTags] = useState<TagType[]>([]);
     const [formData, setFormData] = useState({
         title: "",
         author: "",
         url: "",
         description: "",
-        tags: "",
+        tags: [""],
         type: "",
         first_study_time: "",
-        created_by: signedInUser,
+        created_by: parseInt(signedInUser),
         user_comment: "",
         comment_reason: "",
     });
 
     function handleChange(event: EventType) {
-        const { name, value, type, checked } = event.target;
+        const { name, value } = event.target;
         setFormData((prevFormData) => {
             return {
                 ...prevFormData,
-                [name]: type === "checkbox" ? checked : value,
+                [name]: value,
             };
         });
     }
 
+    function handleTagChange(event: EventType) {
+        const { name, checked } = event.target;
+        setUserSelectedTags((prevUserSelectedTags) => {
+            return {
+                ...prevUserSelectedTags,
+                [name]: checked,
+            };
+        });
+    }
+
+    async function fetchAllTags() {
+        const getAllTags = await axios.get(baseUrl + "/tags");
+        const allFetchedTags = getAllTags.data;
+        setAllTags(allFetchedTags);
+    }
+
     async function submitNewResource() {
+        formData.tags = addTagsToResources(userSelectedTags);
+        console.log(formData);
         const addNewResource = await axios.post(
             baseUrl + "/resources/",
             formData
         );
         console.log(addNewResource);
     }
+
+    useEffect(() => {
+        fetchAllTags();
+    }, []);
 
     return (
         <>
@@ -83,15 +115,23 @@ export default function AddNewResource(
                     ></input>
                 </label>
                 <fieldset>
-                    <input
-                        type="checkbox"
-                        id="CSS"
-                        name="CSS"
-                        value="CSS"
-                        checked={formData.tags === "CSS"}
-                        onChange={handleChange}
-                    ></input>
-                    <label htmlFor="CSS">CSS</label>
+                    {allTags.map((tag) => {
+                        return (
+                            <div key={tag.id}>
+                                <input
+                                    type="checkbox"
+                                    id={String(tag.id)}
+                                    name={tag.tag_name}
+                                    value={tag.tag_name}
+                                    checked={userSelectedTags.tag_name}
+                                    onChange={handleTagChange}
+                                ></input>
+                                <label htmlFor={tag.tag_name}>
+                                    {tag.tag_name}
+                                </label>
+                            </div>
+                        );
+                    })}
                 </fieldset>
                 <label>
                     Type:
@@ -116,7 +156,7 @@ export default function AddNewResource(
                     <input
                         type="radio"
                         id="option1"
-                        name="I recommend this resource after having used it"
+                        name="user_comment"
                         value="I recommend this resource after having used it"
                         checked={
                             formData.user_comment ===
@@ -132,7 +172,7 @@ export default function AddNewResource(
                     <input
                         type="radio"
                         id="option2"
-                        name="I do not recommend this resource, having used it"
+                        name="user_comment"
                         value="I do not recommend this resource, having used it"
                         checked={
                             formData.user_comment ===
@@ -147,7 +187,7 @@ export default function AddNewResource(
                     <input
                         type="radio"
                         id="option3"
-                        name="I have not used this resource but it looks promising"
+                        name="user_comment"
                         value="I have not used this resource but it looks promising"
                         checked={
                             formData.user_comment ===
