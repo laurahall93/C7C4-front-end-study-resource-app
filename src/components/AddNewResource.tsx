@@ -62,14 +62,19 @@ export default function AddNewResource({
         setAllTags(allFetchedTags);
     }
 
-    async function submitNewResource() {
-        formData.tags = addTagsToResources(userSelectedTags);
-        console.log(formData);
-        const addNewResource = await axios.post(
-            baseUrl + "/resources/",
-            formData
-        );
-        console.log(addNewResource);
+    async function submitNewResource(e: React.FormEvent<HTMLFormElement>) {
+        try {
+            e.preventDefault();
+            formData.tags = addTagsToResources(userSelectedTags);
+            console.log(formData);
+            const addNewResource = await axios.post(
+                baseUrl + "/resources/",
+                formData
+            );
+            console.log(addNewResource);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     useEffect(() => {
@@ -78,7 +83,7 @@ export default function AddNewResource({
 
     return (
         <>
-            <form onSubmit={submitNewResource}>
+            <form onSubmit={(e) => submitNewResource(e)}>
                 <label>
                     Title:
                     <input
