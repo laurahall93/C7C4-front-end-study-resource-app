@@ -6,10 +6,12 @@ import { SingleFullResource } from "./SingleFullResource";
 
 interface SingleSummaryResourceProps {
     resource: ResourceType;
+    signedInUser: string;
 }
 
 export function SingleSummaryResource({
     resource,
+    signedInUser,
 }: SingleSummaryResourceProps): JSX.Element {
     const [showFullResource, setShowFullResource] = useState<boolean>(false);
 
@@ -20,7 +22,10 @@ export function SingleSummaryResource({
     return (
         <div>
             {showFullResource === true ? (
-                <SingleFullResource resource={resource}></SingleFullResource>
+                <SingleFullResource
+                    resource={resource}
+                    signedInUser={signedInUser}
+                ></SingleFullResource>
             ) : (
                 <div className="single-summary-resource-container">
                     <h1>{resource.title}</h1>

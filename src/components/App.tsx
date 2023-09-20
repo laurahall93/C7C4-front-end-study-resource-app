@@ -8,13 +8,13 @@ import { NavBar } from "./NavBar";
 import AddNewResource from "./AddNewResource";
 
 function App() {
-    const [signedInUser, setSignedInUser] = useState<string | undefined>();
+    const [signedInUser, setSignedInUser] = useState<string>("0");
     const [navBarChoice, setNavBarChoice] = useState<string>("AllResources");
 
     return (
         <div className="App">
             <Header />
-            {signedInUser === undefined ? (
+            {signedInUser === "0" ? (
                 <UserSignIn
                     signedInUser={signedInUser}
                     setSignedInUser={setSignedInUser}
@@ -28,9 +28,12 @@ function App() {
                 />
             )}
             {navBarChoice === "AddNewResource" && signedInUser ? (
-                <AddNewResource signedInUser={signedInUser} />
+                <AddNewResource
+                    setNavBarChoice={setNavBarChoice}
+                    signedInUser={signedInUser}
+                />
             ) : (
-                <AllResources />
+                <AllResources signedInUser={signedInUser} />
             )}
             <Footer />
         </div>

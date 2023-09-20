@@ -9,4 +9,3 @@ export default function addTagsToResources(userSelectedTags: SelectedTagsType) {
     }
     return tagsArray;
 }
-console.log(addTagsToResources({ node: true, html: false, JS: true }));

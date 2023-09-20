@@ -10,7 +10,7 @@ export interface ResourceType {
     creation_time: string;
     user_comment: string;
     comment_reason: string;
-    name: string;
+    user_name: string;
 }
 
 export interface UserType {
