@@ -1,6 +1,6 @@
 import { ResourceType } from "../types/types";
 
-export function filterResources(
+export function filterBySearch(
     searchInput: string,
     resourceList: ResourceType[]
 ): ResourceType[] {
