@@ -63,7 +63,8 @@ img {
     font-size: larger;
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 }
-.single-summary-resource-container {
+.single-summary-resource-container,
+.single-full-resource-container {
     background-color: #f4f6e4;
     border: 1px solid green;
     margin-top: 3%;
@@ -73,6 +74,7 @@ img {
     display: box;
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 }
+
 a {
     text-decoration: none;
     color: inherit;
