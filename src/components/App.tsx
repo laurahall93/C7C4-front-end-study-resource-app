@@ -6,6 +6,7 @@ import { useState } from "react";
 import { UserSignIn } from "./UserSignIn";
 import { NavBar } from "./NavBar";
 import AddNewResource from "./AddNewResource";
+import { StudyList } from "./StudyList";
 
 function App() {
     const [signedInUser, setSignedInUser] = useState<string | undefined>();
@@ -29,6 +30,8 @@ function App() {
             )}
             {navBarChoice === "AddNewResource" && signedInUser ? (
                 <AddNewResource signedInUser={signedInUser} />
+            ) : navBarChoice === "StudyList" && signedInUser ? (
+                <StudyList signedInUser={signedInUser} />
             ) : (
                 <AllResources />
             )}
