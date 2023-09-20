@@ -35,6 +35,7 @@ export function NavBar({
 
     useEffect(() => {
         fetchAndStoreUser();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [signedInUser]);
 
     return (
