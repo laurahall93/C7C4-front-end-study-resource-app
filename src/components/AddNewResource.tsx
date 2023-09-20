@@ -218,7 +218,7 @@ export default function AddNewResource({
                         onChange={handleChange}
                     ></input>
                 </label>
-                <button>Submit</button>
+                <button name="submit-btn">Submit</button>
                 <button onClick={handleCancel}>Cancel</button>
             </form>
         </>
