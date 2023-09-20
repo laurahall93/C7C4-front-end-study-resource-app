@@ -47,7 +47,9 @@ export function NavBar({
             >
                 Add new resource
             </button>
-            <button>View Study List</button>
+            <button onClick={(e) => handleNavBarChoice(e)} value="StudyList">
+                View Study List
+            </button>
             <button onClick={handleLogout}>logout</button>
         </div>
     );
