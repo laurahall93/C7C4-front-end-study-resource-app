@@ -5,6 +5,7 @@ import { baseUrl } from "../utils/baseUrl";
 
 interface SingleFullResourceProps {
     resource: ResourceType;
+    signedInUser: string;
 }
 
 interface IVotes {
@@ -12,17 +13,18 @@ interface IVotes {
     dislikes: number;
 }
 
-// type UsersVoteType = "Liked" | "Disliked" | "Neither";
+type UsersVoteType = "Liked" | "Disliked" | "Neither";
 
 export function SingleFullResource({
     resource,
+    signedInUser,
 }: SingleFullResourceProps): JSX.Element {
     const [resourceVotes, setResourceVotes] = useState<IVotes>({
         likes: 0,
         dislikes: 0,
     });
 
-    // const [usersVote, setUsersVote] = useState<UsersVoteType>("Neither");
+    const [usersVote, setUsersVote] = useState<UsersVoteType>("Neither");
 
     const fetchAndStoreResourceVotes = useCallback(async () => {
         const response = await axios.get(
@@ -36,29 +38,148 @@ export function SingleFullResource({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    // const fetchAndStoreUsersVote = useCallback(async () => {
-    //     const response = await axios.get(`${baseUrl}/users`)
-    // })
+    const fetchAndStoreUsersVote = async () => {
+        const response = await axios.get(
+            `${baseUrl}/users/${parseInt(signedInUser)}/votes/${resource.id}`
+        );
+        const vote = response.data[0].voted;
+        setUsersVote(vote);
+    };
 
     useEffect(() => {
         fetchAndStoreResourceVotes();
-    }, [fetchAndStoreResourceVotes]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [signedInUser, handleClickLike, handleClickDisike]);
 
-    const handleClickLike = async () => {
-        await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
-            voteType: "like",
-            voteAmount: 1,
-        });
-        setResourceVotes((prev) => ({ ...prev, likes: prev.likes + 1 }));
-    };
+    useEffect(() => {
+        fetchAndStoreUsersVote();
+    });
 
-    const handleClickDisike = async () => {
-        await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
-            voteType: "dislike",
-            voteAmount: 1,
-        });
-        setResourceVotes((prev) => ({ ...prev, dislikes: prev.dislikes + 1 }));
-    };
+    async function handleClickLike() {
+        console.log("In handleLike - current state of usersVote: ", usersVote);
+        let usersNewVote: UsersVoteType;
+        switch (usersVote) {
+            case "Neither":
+                console.log("have entered the neither case block in switch ");
+                usersNewVote = "Liked";
+                await axios.patch(
+                    `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                        resource.id
+                    }`,
+                    {
+                        voted: usersNewVote,
+                    }
+                );
+
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "like",
+                    voteAmount: 1,
+                });
+                break;
+            case "Disliked":
+                console.log("have entered the dislike case block in switch ");
+                usersNewVote = "Liked";
+                await axios.patch(
+                    `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                        resource.id
+                    }`,
+                    {
+                        voted: usersNewVote,
+                    }
+                );
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "like",
+                    voteAmount: 1,
+                });
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "dislike",
+                    voteAmount: -1,
+                });
+                break;
+            case "Liked":
+                console.log("have entered the like case block in switch ");
+                usersNewVote = "Neither";
+                await axios.patch(
+                    `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                        resource.id
+                    }`,
+                    {
+                        voted: usersNewVote,
+                    }
+                );
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "like",
+                    voteAmount: -1,
+                });
+                break;
+            default:
+                break;
+        }
+    }
+
+    async function handleClickDisike() {
+        console.log(
+            "In handleDislike - current state of usersVote: ",
+            usersVote
+        );
+        let usersNewVote: UsersVoteType;
+        switch (usersVote) {
+            case "Neither":
+                console.log("have entered the neither case block in switch ");
+                usersNewVote = "Disliked";
+                await axios.patch(
+                    `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                        resource.id
+                    }`,
+                    {
+                        voted: usersNewVote,
+                    }
+                );
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "dislike",
+                    voteAmount: 1,
+                });
+                break;
+            case "Disliked":
+                console.log("have entered the dislike case block in switch ");
+                usersNewVote = "Neither";
+                await axios.patch(
+                    `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                        resource.id
+                    }`,
+                    {
+                        voted: usersNewVote,
+                    }
+                );
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "dislike",
+                    voteAmount: -1,
+                });
+                break;
+            case "Liked":
+                usersNewVote = "Disliked";
+                console.log("have entered the like case block in switch ");
+                await axios.patch(
+                    `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                        resource.id
+                    }`,
+                    {
+                        voted: usersNewVote,
+                    }
+                );
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "like",
+                    voteAmount: -1,
+                });
+                await axios.patch(`${baseUrl}/resources/${resource.id}/votes`, {
+                    voteType: "dislike",
+                    voteAmount: 1,
+                });
+                break;
+            default:
+                break;
+        }
+    }
 
     return (
         <div className="single-full-resource-container">
@@ -70,13 +191,13 @@ export function SingleFullResource({
             <p>{resource.type}</p>
             <p>{resource.first_study_time}</p>
             <p>{resource.creation_time}</p>
-            <p>Recommended by {resource.name}</p>
+            <p>Recommended by {resource.user_name}</p>
             <p>{resource.user_comment}</p>
             <p>{resource.comment_reason}</p>
-            <button onClick={handleClickLike}>
+            <button name="votes" value={"like"} onClick={handleClickLike}>
                 {resourceVotes.likes} Likes
             </button>
-            <button onClick={handleClickDisike}>
+            <button name="votes" value={"dislike"} onClick={handleClickDisike}>
                 {resourceVotes.dislikes} Dislikes
             </button>
         </div>

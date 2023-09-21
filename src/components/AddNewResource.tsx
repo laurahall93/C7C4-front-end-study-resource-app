@@ -4,8 +4,9 @@ import { baseUrl } from "../utils/baseUrl";
 import { TagType } from "../types/types";
 import addTagsToResources from "../utils/filterTagObjToArray";
 
-interface SignedInUserIdProps {
+interface AddNewResourceProps {
     signedInUser: string;
+    setNavBarChoice: (choice: string) => void;
 }
 
 interface EventType {
@@ -18,7 +19,8 @@ export interface SelectedTagsType {
 
 export default function AddNewResource({
     signedInUser,
-}: SignedInUserIdProps): JSX.Element {
+    setNavBarChoice,
+}: AddNewResourceProps): JSX.Element {
     const [userSelectedTags, setUserSelectedTags] = useState<SelectedTagsType>(
         {}
     );
@@ -80,6 +82,10 @@ export default function AddNewResource({
     useEffect(() => {
         fetchAllTags();
     }, []);
+
+    const handleCancel = () => {
+        setNavBarChoice("AllResources");
+    };
 
     return (
         <>
@@ -212,7 +218,8 @@ export default function AddNewResource({
                         onChange={handleChange}
                     ></input>
                 </label>
-                <button>Submit</button>
+                <button name="submit-btn">Submit</button>
+                <button onClick={handleCancel}>Cancel</button>
             </form>
         </>
     );

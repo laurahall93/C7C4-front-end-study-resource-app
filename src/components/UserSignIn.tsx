@@ -4,8 +4,8 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 
 interface SignedInUserProps {
-    signedInUser: string | undefined;
-    setSignedInUser: React.Dispatch<React.SetStateAction<string | undefined>>;
+    signedInUser: string;
+    setSignedInUser: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export function UserSignIn(props: SignedInUserProps): JSX.Element {

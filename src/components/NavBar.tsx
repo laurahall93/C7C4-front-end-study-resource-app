@@ -3,8 +3,8 @@ import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 
 interface SignedInUserProps {
-    signedInUser: string | undefined;
-    setSignedInUser: React.Dispatch<React.SetStateAction<string | undefined>>;
+    signedInUser: string;
+    setSignedInUser: React.Dispatch<React.SetStateAction<string>>;
     navBarChoice: string;
     setNavBarChoice: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -23,7 +23,7 @@ export function NavBar({
     }
 
     function handleLogout() {
-        setSignedInUser(undefined);
+        setSignedInUser("0");
     }
 
     function handleNavBarChoice(
