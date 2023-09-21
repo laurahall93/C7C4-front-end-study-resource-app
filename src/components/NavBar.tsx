@@ -12,6 +12,7 @@ interface SignedInUserProps {
 export function NavBar({
     signedInUser,
     setSignedInUser,
+    navBarChoice,
     setNavBarChoice,
 }: SignedInUserProps): JSX.Element {
     const [userName, setUserName] = useState<string>("");
@@ -39,18 +40,33 @@ export function NavBar({
     }, [signedInUser]);
 
     return (
-        <div>
+        <div className="nav-container">
             <p>Hi {userName}</p>
             <button
                 onClick={(e) => handleNavBarChoice(e)}
                 value="AddNewResource"
+                className={
+                    navBarChoice === "AddNewResource"
+                        ? "selected-nav nav-button"
+                        : "nav-button"
+                }
             >
                 Add new resource
             </button>
-            <button onClick={(e) => handleNavBarChoice(e)} value="StudyList">
+            <button
+                onClick={(e) => handleNavBarChoice(e)}
+                value="StudyList"
+                className={
+                    navBarChoice === "StudyList"
+                        ? "selected-nav nav-button"
+                        : "nav-button"
+                }
+            >
                 View Study List
             </button>
-            <button onClick={handleLogout}>logout</button>
+            <button onClick={handleLogout} className="nav-button">
+                logout
+            </button>
         </div>
     );
 }

@@ -97,10 +97,6 @@ a:hover {
     border: 1px solid #556b2f;
 }
 
-.non-selected-tag {
-    background-color: #b5b8b1;
-}
-
 @media (max-width: 700px) {
     .main-body {
         padding-left: 2%;
@@ -132,4 +128,60 @@ a:hover {
     .recources-input {
         width: 90%;
     }
+}
+
+.nav-container {
+    background-color: #f4f6e4;
+    margin-top: 10px;
+    margin-left: 20px;
+    padding-left: 20px;
+    padding-right: 10px;
+    width: fit-content;
+    display: flex;
+}
+
+.nav-button {
+    margin: 10px 10px 10px 10px;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+}
+
+.selected-nav {
+    background-color: #556b2f;
+    color: white;
+    border: 1px solid #556b2f;
+}
+
+.study-button {
+    margin: 90px 10px 90px 10px;
+    padding: 0px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+    grid-area: completeButton;
+}
+
+.single-study-resource-container {
+    background-color: #f4f6e4;
+    border: 1px solid green;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    padding-left: 3%;
+    width: 90%;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
+    justify-content: left;
+    display: inline-grid;
+    grid-template-areas:
+        "resource completeButton deletebin"
+        "resource completeButton deletebin"
+        "resource completeButton deletebin";
+    grid-template-columns: 5fr 1fr 1fr;
+}
+
+.resource {
+    grid-area: resource;
+}
+.deleteBin {
+    grid-area: deletebin;
+    margin: 80px 10px 80px 10px;
 }

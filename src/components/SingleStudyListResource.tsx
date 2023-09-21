@@ -45,20 +45,23 @@ export function SingleStudyListResource({
             {
                 /*showFullResource === true ? (
                 <SingleFullResource resource={resource}></SingleFullResource>
-            ) : */ <div className="single-summary-resource-container">
-                    <h1>{studyListResource.title}</h1>
-                    <span>
-                        <strong> By: </strong>
-                        {studyListResource.author}
-                    </span>
-                    <a href={studyListResource.url}> URL</a>
-                    <p>{studyListResource.description}</p>
-                    <p>
-                        <strong>Tags: </strong>
-                        {studyListResource.tags}
-                    </p>
+            ) : */ <div className="single-study-resource-container">
+                    <div className="resource">
+                        <h1>{studyListResource.title}</h1>
+                        <span>
+                            <strong> By: </strong>
+                            {studyListResource.author}
+                        </span>
+                        <a href={studyListResource.url}> URL</a>
+                        <p>{studyListResource.description}</p>
+                        <p>
+                            <strong>Tags: </strong>
+                            {studyListResource.tags}
+                        </p>
+                    </div>
                     {studyListResource.is_completed === true ? (
                         <button
+                            className="study-button"
                             onClick={() =>
                                 handleComplete(
                                     studyListResource.studyitem_id,
@@ -70,6 +73,7 @@ export function SingleStudyListResource({
                         </button>
                     ) : (
                         <button
+                            className="study-button"
                             onClick={() =>
                                 handleComplete(
                                     studyListResource.studyitem_id,
@@ -82,6 +86,7 @@ export function SingleStudyListResource({
                         </button>
                     )}
                     <DeleteIcon
+                        className="deleteBin"
                         boxSize={100}
                         color="#556b2f"
                         onClick={() =>

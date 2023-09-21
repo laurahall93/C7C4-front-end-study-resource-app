@@ -50,7 +50,7 @@ export function AllResources(): JSX.Element {
                     className={
                         chosenTags.includes(tag.tag_name)
                             ? "selected-tag tag-button"
-                            : "non-selected-tag tag-button"
+                            : "tag-button"
                     }
                     onClick={() => handleSelectTag(tag.tag_name)}
                     key={tag.id}
