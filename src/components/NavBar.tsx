@@ -41,6 +41,9 @@ export function NavBar({
     return (
         <div>
             <p>Hi {userName}</p>
+            <button onClick={(e) => handleNavBarChoice(e)} value="AllResources">
+                View all Resources
+            </button>
             <button
                 onClick={(e) => handleNavBarChoice(e)}
                 value="AddNewResource"
