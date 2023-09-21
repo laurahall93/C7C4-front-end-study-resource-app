@@ -13,6 +13,11 @@ export interface ResourceType {
     user_name: string;
 }
 
+export interface StudyListType extends ResourceType {
+    studyitem_id: number;
+    is_completed: boolean;
+}
+
 export interface UserType {
     id: number;
     name: string;
