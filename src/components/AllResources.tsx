@@ -5,11 +5,11 @@ import { ResourceType, TagType } from "../types/types";
 import { baseUrl } from "../utils/baseUrl";
 import { filterBySearchAndTags } from "../utils/filterBySearchAndTags";
 
-interface IAllResources {
+interface AllResourcesProps {
     signedInUser: string;
 }
 
-export function AllResources({ signedInUser }: IAllResources): JSX.Element {
+export function AllResources({ signedInUser }: AllResourcesProps): JSX.Element {
     const [searchInput, setSearchInput] = useState("");
     const [allResources, setAllResources] = useState<ResourceType[]>([]);
     const [chosenTags, setChosenTags] = useState<string[]>([]);

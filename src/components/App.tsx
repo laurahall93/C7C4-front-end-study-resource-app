@@ -28,10 +28,12 @@ function App() {
                     setNavBarChoice={setNavBarChoice}
                 />
             )}
-            {navBarChoice === "AddNewResource" && signedInUser ? (
-
-                <AddNewResource setNavBarChoice={setNavBarChoice} signedInUser={signedInUser} />
-            ) : navBarChoice === "StudyList" && signedInUser ? (
+            {navBarChoice === "AddNewResource" && signedInUser !== "0" ? (
+                <AddNewResource
+                    setNavBarChoice={setNavBarChoice}
+                    signedInUser={signedInUser}
+                />
+            ) : navBarChoice === "StudyList" && signedInUser !== "0" ? (
                 <StudyList signedInUser={signedInUser} />
             ) : (
                 <AllResources signedInUser={signedInUser} />

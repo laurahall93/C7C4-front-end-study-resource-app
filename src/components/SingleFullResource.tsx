@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-import { ResourceType } from "../types/types";
+import { ResourceType, StudyListType } from "../types/types";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
+import { isResourceInStudyList } from "../utils/isResourceInStudyList";
 
 interface SingleFullResourceProps {
     resource: ResourceType;
@@ -19,6 +20,8 @@ export function SingleFullResource({
     resource,
     signedInUser,
 }: SingleFullResourceProps): JSX.Element {
+    const [userStudyList, setUserStudyList] = useState<StudyListType[]>();
+    const [addedToStudyList, SetAddedToStudyList] = useState<StudyListType>();
     const [resourceVotes, setResourceVotes] = useState<IVotes>({
         likes: 0,
         dislikes: 0,
@@ -181,6 +184,26 @@ export function SingleFullResource({
         }
     }
 
+    async function fetchAndStoreUserStudyList() {
+        const id = parseInt(signedInUser);
+        const response = await axios.get(baseUrl + `/users/${id}/study-list`);
+        const fetchedStudyList = response.data;
+        setUserStudyList(fetchedStudyList);
+    }
+
+    useEffect(() => {
+        fetchAndStoreUserStudyList();
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [addedToStudyList]);
+
+    async function handleAddToStudyList(id: number) {
+        const response = await axios.post(
+            baseUrl + `/users/${signedInUser}/study-list`,
+            { resourceId: id }
+        );
+        SetAddedToStudyList(response.data);
+    }
+
     return (
         <div className="single-full-resource-container">
             <h1>{resource.title}</h1>
@@ -200,6 +223,15 @@ export function SingleFullResource({
             <button name="votes" value={"dislike"} onClick={handleClickDisike}>
                 {resourceVotes.dislikes} Dislikes
             </button>
+            {userStudyList &&
+            isResourceInStudyList(resource.id, userStudyList) ? (
+                <p>In your Study List !</p>
+            ) : (
+                <button onClick={() => handleAddToStudyList(resource.id)}>
+                    {" "}
+                    Add to Study List{" "}
+                </button>
+            )}
         </div>
     );
 }
