@@ -1,6 +1,6 @@
-describe("My First Test", () => {
-    it('clicks the "URL"', () => {
-        cy.visit("http://localhost:3000/");
+describe("Add a new resource", () => {
+    it("Signs in as a user, adds a resource and returns to the all resources page", () => {
+        cy.visit("https://c7c4-study-resource-catalog-app.netlify.app/");
         cy.get("select").select("Adil Rahman");
         cy.contains("Adil Rahman");
         cy.contains("Add new resource").click();
@@ -14,7 +14,5 @@ describe("My First Test", () => {
         cy.get("input[id=option1]").click();
         cy.get("input[name=comment_reason]").type("its amazing");
         cy.get("button[name=submit-btn]").click();
-        cy.wait(1000);
-        cy.visit("http://localhost:3000/");
     });
 });
