@@ -14,7 +14,5 @@ describe("My First Test", () => {
         cy.get("input[id=option1]").click();
         cy.get("input[name=comment_reason]").type("its amazing");
         cy.get("button[name=submit-btn]").click();
-        cy.wait(1000);
-        cy.visit("http://localhost:3000/");
     });
 });

@@ -69,11 +69,8 @@ export default function AddNewResource({
             e.preventDefault();
             formData.tags = addTagsToResources(userSelectedTags);
             console.log(formData);
-            const addNewResource = await axios.post(
-                baseUrl + "/resources/",
-                formData
-            );
-            console.log(addNewResource);
+            await axios.post(baseUrl + "/resources/", formData);
+            setNavBarChoice("AllResources");
         } catch (error) {
             console.error(error);
         }
