@@ -1,6 +1,6 @@
 describe("Add a new resource", () => {
     it("Signs in as a user, adds a resource and returns to the all resources page", () => {
-        cy.visit("https://c7c4-study-resource-catalog-app.netlify.app/");
+        cy.visit("https://-study-resource-catalog-app.netlify.app/");
         cy.get("select").select("Adil Rahman");
         cy.contains("Adil Rahman");
         cy.contains("Add new resource").click();
