@@ -86,7 +86,10 @@ export default function AddNewResource({
 
     return (
         <>
-            <form onSubmit={(e) => submitNewResource(e)}>
+            <form
+                onSubmit={(e) => submitNewResource(e)}
+                className="single-full-resource-container"
+            >
                 <label>
                     Title:
                     <input
@@ -122,11 +125,12 @@ export default function AddNewResource({
                         onChange={handleChange}
                     ></input>
                 </label>
-                <fieldset>
+                <fieldset className="checkbox-container">
                     {allTags.map((tag) => {
                         return (
                             <div key={tag.id}>
                                 <input
+                                    className="tag-checkbox"
                                     type="checkbox"
                                     id={String(tag.id)}
                                     name={tag.tag_name}

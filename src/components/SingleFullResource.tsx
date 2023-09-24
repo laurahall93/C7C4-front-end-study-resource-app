@@ -3,6 +3,8 @@ import { ResourceType, StudyListType } from "../types/types";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import { isResourceInStudyList } from "../utils/isResourceInStudyList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 interface SingleFullResourceProps {
     resource: ResourceType;
@@ -207,21 +209,21 @@ export function SingleFullResource({
     return (
         <div className="single-full-resource-container">
             <h1>{resource.title}</h1>
-            <span>by {resource.author}</span>
+            <span>By: {resource.author}</span>
             <a href={`${resource.url}`}>URL</a>
             <p>{resource.description}</p>
             <p>{resource.tags}</p>
             <p>{resource.type}</p>
             <p>{resource.first_study_time}</p>
             <p>{resource.creation_time}</p>
-            <p>Recommended by {resource.user_name}</p>
+            <p>Recommended by : {resource.user_name}</p>
             <p>{resource.user_comment}</p>
             <p>{resource.comment_reason}</p>
             <button name="votes" value={"like"} onClick={handleClickLike}>
-                {resourceVotes.likes} Likes
+                {resourceVotes.likes} <FontAwesomeIcon icon={faThumbsUp} />
             </button>
             <button name="votes" value={"dislike"} onClick={handleClickDisike}>
-                {resourceVotes.dislikes} Dislikes
+                {resourceVotes.dislikes} <FontAwesomeIcon icon={faThumbsDown} />
             </button>
             {userStudyList &&
             isResourceInStudyList(resource.id, userStudyList) ? (
