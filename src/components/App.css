@@ -17,6 +17,14 @@ body {
     background-color: #cfdbd5;
     font-size: large;
     font-weight: bolder;
+    width: 100%;
+}
+.logo {
+    display: inline-flex;
+    align-items: center;
+    justify-items: left;
+    width: 700px;
+    margin: 0px;
 }
 
 .footer {
@@ -39,17 +47,21 @@ button {
 
 .sign-in {
     padding-top: 20px;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
-    justify-content: right;
     font-size: x-large;
+    justify-items: end;
+    justify-content: end;
+    margin-right: 20px;
+    width: 600px;
+    align-items: center;
 }
 #user-sign-in {
     border-radius: 3%;
     margin-left: 1%;
     font-family: "Literata", serif;
     font-size: large;
-    width: 200px;
+    width: fit-content;
     margin-right: 2%;
     padding: 5px;
     border: 1px solid green;
@@ -78,6 +90,12 @@ button {
     box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.3);
 }
 
+.study-add-button {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 a {
     text-decoration: none;
     color: inherit;
@@ -100,7 +118,7 @@ a:hover {
 
 .tag-button {
     margin: 20px 1px 10px 1px;
-    padding: 5px;
+    padding: 0px 3px 3px;
     border-radius: 5px;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
 }
@@ -111,8 +129,22 @@ a:hover {
     border: 1px solid #556b2f;
 }
 
-.non-selected-tag {
+.voted {
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.not-voted {
     background-color: #b5b8b1;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.url {
+    display: block;
+    margin-top: 10px;
 }
 
 @media (max-width: 700px) {
@@ -133,7 +165,7 @@ a:hover {
 
     .sign-in {
         padding-top: 10px;
-        justify-content: center;
+        justify-content: right;
     }
 
     #user-sign-in {
@@ -149,20 +181,21 @@ a:hover {
 }
 
 .nav-container {
-    background-color: #f4f6e4;
-    margin-top: 10px;
-    margin-left: 20px;
-    padding-left: 20px;
-    padding-right: 10px;
-    width: fit-content;
     display: flex;
+    justify-self: right;
+    justify-content: end;
+    align-items: center;
+    flex-direction: row;
+    width: 700px;
 }
 
 .nav-button {
-    margin: 10px 10px 10px 10px;
-    padding: 5px;
+    margin: 10px 5px 10px 5px;
+    padding: 0px 5px 0px 5px;
     border-radius: 5px;
     box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.3);
+    align-items: center;
+    justify-self: right;
 }
 
 .selected-nav {

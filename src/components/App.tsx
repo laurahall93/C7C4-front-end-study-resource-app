@@ -14,30 +14,34 @@ function App() {
 
     return (
         <div className="App">
-            <Header />
-            {signedInUser === "0" ? (
-                <UserSignIn
-                    signedInUser={signedInUser}
-                    setSignedInUser={setSignedInUser}
-                />
-            ) : (
-                <NavBar
-                    signedInUser={signedInUser}
-                    setSignedInUser={setSignedInUser}
-                    navBarChoice={navBarChoice}
-                    setNavBarChoice={setNavBarChoice}
-                />
-            )}
-            {navBarChoice === "AddNewResource" && signedInUser !== "0" ? (
-                <AddNewResource
-                    setNavBarChoice={setNavBarChoice}
-                    signedInUser={signedInUser}
-                />
-            ) : navBarChoice === "StudyList" && signedInUser !== "0" ? (
-                <StudyList signedInUser={signedInUser} />
-            ) : (
-                <AllResources signedInUser={signedInUser} />
-            )}
+            <div className="header">
+                <Header />
+                {signedInUser === "0" ? (
+                    <UserSignIn
+                        signedInUser={signedInUser}
+                        setSignedInUser={setSignedInUser}
+                    />
+                ) : (
+                    <NavBar
+                        signedInUser={signedInUser}
+                        setSignedInUser={setSignedInUser}
+                        navBarChoice={navBarChoice}
+                        setNavBarChoice={setNavBarChoice}
+                    />
+                )}
+            </div>
+            <div className="main-body">
+                {navBarChoice === "AddNewResource" && signedInUser !== "0" ? (
+                    <AddNewResource
+                        setNavBarChoice={setNavBarChoice}
+                        signedInUser={signedInUser}
+                    />
+                ) : navBarChoice === "StudyList" && signedInUser !== "0" ? (
+                    <StudyList signedInUser={signedInUser} />
+                ) : (
+                    <AllResources signedInUser={signedInUser} />
+                )}
+            </div>
             <Footer />
         </div>
     );

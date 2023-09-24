@@ -41,7 +41,7 @@ export function SingleStudyListResource({
     console.log(studyListResource);
 
     return (
-        <div className="single-summary-resource-container">
+        <div>
             {
                 /*showFullResource === true ? (
                 <SingleFullResource resource={resource}></SingleFullResource>
@@ -59,7 +59,10 @@ export function SingleStudyListResource({
                             <strong> By: </strong>
                             {studyListResource.author}
                         </span>
-                        <a href={studyListResource.url}> URL</a>
+                        <a href={studyListResource.url} className="url">
+                            {" "}
+                            URL
+                        </a>
                         <p>{studyListResource.description}</p>
                         <p>
                             <strong>Tags: </strong>

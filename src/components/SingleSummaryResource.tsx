@@ -33,7 +33,10 @@ export function SingleSummaryResource({
                         <strong> By: </strong>
                         {resource.author}
                     </span>
-                    <a href={resource.url}> URL</a>
+                    <a href={resource.url} className="url">
+                        {" "}
+                        URL
+                    </a>
                     <p>{resource.description}</p>
                     <p>
                         <strong>Tags: </strong>
