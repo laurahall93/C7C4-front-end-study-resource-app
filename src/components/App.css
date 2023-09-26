@@ -6,6 +6,10 @@ html {
 }
 body {
     margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    height: auto;
 }
 .main-body {
     padding-left: 5%;
@@ -151,7 +155,12 @@ a:hover {
     height: fit-content;
     align-content: center;
 }
-
+.cancel-button:hover {
+    background-color: rgb(201, 81, 81);
+}
+.submit-button:hover {
+    background-color: rgb(68, 158, 68);
+}
 .tag-button {
     margin: 20px 1px 10px 1px;
     padding: 0px 3px 3px;

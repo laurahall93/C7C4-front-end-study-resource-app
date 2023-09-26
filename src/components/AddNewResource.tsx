@@ -226,12 +226,14 @@ export default function AddNewResource({
                         onChange={handleChange}
                     ></input>
                 </label>
-                <button name="submit-btn" className="form-button">
-                    Submit
-                </button>
-                <button onClick={handleCancel} className="form-button">
-                    Cancel
-                </button>
+                <div className="form-btn">
+                    <button name="submit-btn" className="submit-button">
+                        Submit
+                    </button>
+                    <button onClick={handleCancel} className="cancel-button">
+                        Cancel
+                    </button>
+                </div>
             </form>
         </>
     );
