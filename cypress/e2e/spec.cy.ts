@@ -4,7 +4,7 @@ describe("Add a new resource", () => {
         cy.intercept("/resources*").as("getResources");
         cy.intercept("/users/:userId/votes*").as("getUsersVotes");
         cy.intercept("/resources/:id/votes*").as("getResourcesVotes");
-        cy.visit("https://c7c4-study-resource-catalog-app.netlify.app/");
+        cy.visit("http://localhost:3000//");
         cy.wait(["@getResources", "@getUsers"]);
         cy.wait(1000);
         cy.get("select").select("Adil Rahman");
