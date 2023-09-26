@@ -47,7 +47,9 @@ export function SingleFullResource({
     const fetchAndStoreUsersVote = async () => {
         try {
             const response = await axios.get(
-                `${baseUrl}/users/${parseInt(signedInUser)}/votes/${resource.id}`
+                `${baseUrl}/users/${parseInt(signedInUser)}/votes/${
+                    resource.id
+                }`
             );
             if (response.data.length > 0) {
                 const vote = response.data[0].voted;
@@ -65,7 +67,7 @@ export function SingleFullResource({
 
     useEffect(() => {
         fetchAndStoreUsersVote();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [signedInUser]);
 
     async function handleClickLike() {
