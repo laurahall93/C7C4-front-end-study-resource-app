@@ -45,11 +45,17 @@ export function SingleFullResource({
     }, []);
 
     const fetchAndStoreUsersVote = async () => {
-        const response = await axios.get(
-            `${baseUrl}/users/${parseInt(signedInUser)}/votes/${resource.id}`
-        );
-        const vote = response.data[0].voted;
-        setUsersVote(vote);
+        try {
+            const response = await axios.get(
+                `${baseUrl}/users/${parseInt(signedInUser)}/votes/${resource.id}`
+            );
+            if (response.data.length > 0) {
+                const vote = response.data[0].voted;
+                setUsersVote(vote);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -59,7 +65,8 @@ export function SingleFullResource({
 
     useEffect(() => {
         fetchAndStoreUsersVote();
-    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [signedInUser]);
 
     async function handleClickLike() {
         console.log("In handleLike - current state of usersVote: ", usersVote);
