@@ -245,6 +245,7 @@ export function SingleFullResource({
                 ) : (
                     <button
                         onClick={() => handleAddToStudyList(resource.id)}
+                        name="study-add-button"
                         className="study-add-button"
                     >
                         {" "}

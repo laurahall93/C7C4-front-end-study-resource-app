@@ -44,7 +44,7 @@ export function SingleSummaryResource({
                     </p>
                 </div>
             )}
-            <button onClick={toggleShowFullResource}>
+            <button name="show-more" onClick={toggleShowFullResource}>
                 {showFullResource === true ? "Show less" : "Show more"}
             </button>
         </div>
