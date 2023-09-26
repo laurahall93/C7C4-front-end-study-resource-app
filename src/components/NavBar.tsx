@@ -77,7 +77,7 @@ export function NavBar({
                     activeNav === "Log-out" ? "selected-nav" : ""
                 }`}
             >
-                logout
+                Logout
             </button>
         </div>
     );
