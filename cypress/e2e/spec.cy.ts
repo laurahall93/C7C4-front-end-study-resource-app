@@ -2,12 +2,15 @@ describe("Add a new resource", () => {
     it("Signs in as a user, adds a resource and returns to the all resources page", () => {
         cy.intercept("/users*").as("getUsers");
         cy.intercept("/resources*").as("getResources");
+        cy.intercept("/users/:userId/votes*").as("getUsersVotes");
+        cy.intercept("/resources/:id/votes*").as("getResourcesVotes");
         cy.visit("https://c7c4-study-resource-catalog-app.netlify.app/");
         cy.wait(["@getResources", "@getUsers"]);
         cy.get("select").select("Adil Rahman");
         cy.contains("Adil Rahman");
         cy.contains("View all Resources").click();
         cy.contains("Show more").click();
+        cy.wait(["@getUsersVotes", "@getResourcesVotes"]);
         cy.contains("Show less").click();
         cy.contains("View Study List").click();
         cy.contains("logout").click();
