@@ -33,7 +33,10 @@ export function SingleSummaryResource({
                         <strong> By: </strong>
                         {resource.author}
                     </span>
-                    <a href={resource.url}> URL</a>
+                    <a href={resource.url} className="url">
+                        {" "}
+                        URL
+                    </a>
                     <p>{resource.description}</p>
                     <p>
                         <strong>Tags: </strong>
@@ -41,7 +44,7 @@ export function SingleSummaryResource({
                     </p>
                 </div>
             )}
-            <button onClick={toggleShowFullResource}>
+            <button name="show-more" onClick={toggleShowFullResource}>
                 {showFullResource === true ? "Show less" : "Show more"}
             </button>
         </div>

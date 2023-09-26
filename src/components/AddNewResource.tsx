@@ -86,10 +86,14 @@ export default function AddNewResource({
 
     return (
         <>
-            <form onSubmit={(e) => submitNewResource(e)}>
+            <form
+                onSubmit={(e) => submitNewResource(e)}
+                className="add-resource-form"
+            >
                 <label>
                     Title:
                     <input
+                        className="input-form"
                         type="text"
                         name="title"
                         value={formData.title}
@@ -99,6 +103,7 @@ export default function AddNewResource({
                 <label>
                     Author:
                     <input
+                        className="input-form"
                         type="text"
                         name="author"
                         value={formData.author}
@@ -108,6 +113,7 @@ export default function AddNewResource({
                 <label>
                     URL:
                     <input
+                        className="input-form"
                         type="url"
                         name="url"
                         value={formData.url}
@@ -117,16 +123,18 @@ export default function AddNewResource({
                 <label>
                     Description:
                     <input
+                        className="input-form"
                         name="description"
                         value={formData.description}
                         onChange={handleChange}
                     ></input>
                 </label>
-                <fieldset>
+                <fieldset className="checkbox-container">
                     {allTags.map((tag) => {
                         return (
                             <div key={tag.id}>
                                 <input
+                                    className="tag-checkbox"
                                     type="checkbox"
                                     id={String(tag.id)}
                                     name={tag.tag_name}
@@ -144,6 +152,7 @@ export default function AddNewResource({
                 <label>
                     Type:
                     <input
+                        className="input-form"
                         type="text"
                         name="type"
                         value={formData.type}
@@ -153,13 +162,14 @@ export default function AddNewResource({
                 <label>
                     First study time:
                     <input
+                        className="input-form"
                         type="text"
                         name="first_study_time"
                         value={formData.first_study_time}
                         onChange={handleChange}
                     ></input>
                 </label>
-                <fieldset>
+                <fieldset className="radio-buttons">
                     <legend> Your comment:</legend>
                     <input
                         type="radio"
@@ -189,7 +199,7 @@ export default function AddNewResource({
                         onChange={handleChange}
                     />
                     <label htmlFor="I do not recommend this resource, having used it">
-                        I do not recommend this resource, having used it
+                        I do not recommend this resource having used it
                     </label>
                     <br />
                     <input
@@ -208,15 +218,20 @@ export default function AddNewResource({
                     </label>
                 </fieldset>
                 <label>
-                    Your reason for the sharing:
+                    Your reason for sharing:
                     <input
+                        className="input-form"
                         name="comment_reason"
                         value={formData.comment_reason}
                         onChange={handleChange}
                     ></input>
                 </label>
-                <button name="submit-btn">Submit</button>
-                <button onClick={handleCancel}>Cancel</button>
+                <button name="submit-btn" className="form-button">
+                    Submit
+                </button>
+                <button onClick={handleCancel} className="form-button">
+                    Cancel
+                </button>
             </form>
         </>
     );

@@ -37,13 +37,15 @@ export function StudyList({ signedInUser }: StudyListProps): JSX.Element {
                     here
                 </h1>
             ) : (
-                userStudyList.map((studyListResource) => (
-                    <SingleStudyListResource
-                        key={studyListResource.studyitem_id}
-                        studyListResource={studyListResource}
-                        setUpdateStudyList={setUpdateStudyList}
-                    />
-                ))
+                <div className="parent-container-of-resources">
+                    {userStudyList.map((studyListResource) => (
+                        <SingleStudyListResource
+                            key={studyListResource.studyitem_id}
+                            studyListResource={studyListResource}
+                            setUpdateStudyList={setUpdateStudyList}
+                        />
+                    ))}
+                </div>
             )}
         </>
     );

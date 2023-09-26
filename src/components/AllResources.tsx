@@ -41,7 +41,7 @@ export function AllResources({ signedInUser }: AllResourcesProps): JSX.Element {
     }
 
     return (
-        <div className="main-body">
+        <div>
             <input
                 className="recources-input"
                 value={searchInput}
@@ -54,7 +54,7 @@ export function AllResources({ signedInUser }: AllResourcesProps): JSX.Element {
                     className={
                         chosenTags.includes(tag.tag_name)
                             ? "selected-tag tag-button"
-                            : "non-selected-tag tag-button"
+                            : "tag-button"
                     }
                     onClick={() => handleSelectTag(tag.tag_name)}
                     key={tag.id}

@@ -3,6 +3,9 @@ import { ResourceType, StudyListType } from "../types/types";
 import axios from "axios";
 import { baseUrl } from "../utils/baseUrl";
 import { isResourceInStudyList } from "../utils/isResourceInStudyList";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
+import { filterDateTime } from "../utils/filterDateTime";
 
 interface SingleFullResourceProps {
     resource: ResourceType;
@@ -207,30 +210,50 @@ export function SingleFullResource({
     return (
         <div className="single-full-resource-container">
             <h1>{resource.title}</h1>
-            <span>by {resource.author}</span>
-            <a href={`${resource.url}`}>URL</a>
+            <span>By: {resource.author}</span>
+            <a href={resource.url} className="url">
+                URL
+            </a>
             <p>{resource.description}</p>
-            <p>{resource.tags}</p>
-            <p>{resource.type}</p>
-            <p>{resource.first_study_time}</p>
-            <p>{resource.creation_time}</p>
-            <p>Recommended by {resource.user_name}</p>
-            <p>{resource.user_comment}</p>
-            <p>{resource.comment_reason}</p>
-            <button name="votes" value={"like"} onClick={handleClickLike}>
-                {resourceVotes.likes} Likes
+            <p>Tags: {resource.tags}</p>
+            <p>Type: {resource.type}</p>
+            <p>First Study Time: {resource.first_study_time}</p>
+            <p>Created on: {filterDateTime(resource.creation_time)}</p>
+            <p>Recommended by : {resource.user_name}</p>
+            <p>Creator Recommendation: {resource.user_comment}</p>
+            <p>Creator Comment: {resource.comment_reason}</p>
+            <button
+                name="votes"
+                value={"like"}
+                className={usersVote === "Liked" ? "voted" : "not-voted"}
+                onClick={handleClickLike}
+            >
+                {resourceVotes.likes} <FontAwesomeIcon icon={faThumbsUp} />
             </button>
-            <button name="votes" value={"dislike"} onClick={handleClickDisike}>
-                {resourceVotes.dislikes} Dislikes
+            <button
+                name="votes"
+                value={"dislike"}
+                className={usersVote === "Disliked" ? "voted" : "not-voted"}
+                onClick={handleClickDisike}
+            >
+                {resourceVotes.dislikes} <FontAwesomeIcon icon={faThumbsDown} />
             </button>
-            {userStudyList &&
-            isResourceInStudyList(resource.id, userStudyList) ? (
-                <p>In your Study List !</p>
+            {signedInUser !== "0" ? (
+                userStudyList &&
+                isResourceInStudyList(resource.id, userStudyList) ? (
+                    <p>In your Study List !</p>
+                ) : (
+                    <button
+                        onClick={() => handleAddToStudyList(resource.id)}
+                        name="study-add-button"
+                        className="study-add-button"
+                    >
+                        {" "}
+                        Add to Study List{" "}
+                    </button>
+                )
             ) : (
-                <button onClick={() => handleAddToStudyList(resource.id)}>
-                    {" "}
-                    Add to Study List{" "}
-                </button>
+                ""
             )}
         </div>
     );
